@@ -1,0 +1,43 @@
+<p>
+  <strong>Title:</strong>
+  <%= @course.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @course.content %>
+</p>
+
+<p>
+  <strong>Start dt:</strong>
+  <%= @course.start_dt %>
+</p>
+
+<p>
+  <strong>End dt:</strong>
+  <%= @course.end_dt %>
+</p>
+
+<% if current_user.teacher? %>
+  <p>
+    <strong>Status:</strong>
+    <%= @course.status %>
+  </p>
+<% end %>
+<% unless current_user.teacher? %>
+  <p>
+    <strong>Teacher:</strong>
+    <%= @course.teacher_name %>
+  </p>
+<% end %>
+<p>
+  <strong>Student length:</strong>
+  <%= @course.student_length %>
+</p>
+<% if current_user.teacher? %>
+  <%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
+<%= link_to 'Back', courses_path %>
+<% unless current_user.admin? %>
+  <%= link_to 'New Comment', new_course_comment_path(@course) %>
+<% end%>
